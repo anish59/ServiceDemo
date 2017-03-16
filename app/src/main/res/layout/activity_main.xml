@@ -27,4 +27,14 @@
         tools:layout_editor_absoluteY="172dp"
         tools:layout_editor_absoluteX="148dp" />
 
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickSetReminder"
+        android:text="Time"
+        android:textSize="15dp"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="172dp" />
+
 </LinearLayout>

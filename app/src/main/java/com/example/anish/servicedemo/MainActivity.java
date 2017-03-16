@@ -24,4 +24,8 @@ public class MainActivity extends AppCompatActivity {
     public void clickTimePick(View view) {
         DateHelper.getTimeFromDilog(context,btnTimePicker);
     }
+
+    public void clickSetReminder(View view) {
+
+    }
 }

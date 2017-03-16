@@ -3,6 +3,7 @@ package com.example.anish.servicedemo;
 import android.app.DatePickerDialog;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -52,4 +53,6 @@ public class DateHelper {
         },mHour,mMin,false);
         timePickerDialog.show();
     }
+
+    //public static Date
 }
