@@ -4,11 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center_horizontal|center_vertical"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context="com.example.anish.servicedemo.MainActivity">
 
+  <LinearLayout
+      android:orientation="horizontal"
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content">
+
   <Button
-      android:text="Date"
+      android:text="@string/date"
       android:onClick="clickPickDate"
       android:id="@+id/btnDatePicker"
       android:textSize="15dp"
@@ -18,7 +24,7 @@
       tools:layout_editor_absoluteX="148dp" />
 
     <Button
-        android:text="Time"
+        android:text="@string/time"
         android:onClick="clickTimePick"
         android:id="@+id/btnTimePicker"
         android:layout_width="wrap_content"
@@ -26,15 +32,16 @@
         android:textSize="15dp"
         tools:layout_editor_absoluteY="172dp"
         tools:layout_editor_absoluteX="148dp" />
-
+</LinearLayout>
     <Button
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="clickSetReminder"
-        android:text="Time"
+        android:text="Set reminder"
         android:textSize="15dp"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="172dp" />
+
 
 </LinearLayout>

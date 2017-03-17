@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ServiceDemo</string>
+    <string name="title">title</string>
+    <string name="subTitle">subTitle</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
 </resources>
