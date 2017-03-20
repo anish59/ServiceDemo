@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.example.anish.servicedemo.MainActivity;
 import com.example.anish.servicedemo.R;
@@ -36,11 +37,13 @@ public class AlarmHelper extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, requestCode, intent1, PendingIntent.FLAG_ONE_SHOT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
                 .setDefaults(NotificationCompat.DEFAULT_SOUND);
+
 
         Random random = new Random();
         int m = random.nextInt(9999 - 1000) + 1000;
@@ -48,19 +51,23 @@ public class AlarmHelper extends BroadcastReceiver {
         notificationManager.notify(m, builder.build()); //0 = ID of notification
     }
 
-    public void setReminder(Context context, Date date, long alarmId, int calId) {
-        if (date == null || date.before(new Date())) {
+    public void setReminder(Context context, Date date, int calId) {
+        cancelAlarm(context, calId);
+        if (date == null) {
             return;
         }
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
+        Log.e("calendar time",""+calendar);
         Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra(AppConstants.intentSubTitle, "Test Title");
-        intent.putExtra(context.getString(R.string.title), "Test subtitle");
+        intent.putExtra(AppConstants.intentTitle, "Test Title");
+        intent.putExtra(AppConstants.intentSubTitle, "Test subtitle");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, calId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager = getAlarmManager(context);
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+
+
     }
 
     private AlarmManager getAlarmManager(Context context) {
@@ -69,5 +76,12 @@ public class AlarmHelper extends BroadcastReceiver {
             alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         }
         return alarmManager;
+    }
+
+    public void cancelAlarm(Context context, long alarmID) {
+        Intent intent = new Intent(context, AlarmHelper.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, (int) alarmID, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager alarmManager = getAlarmManager(context);
+        alarmManager.cancel(pendingIntent);
     }
 }
