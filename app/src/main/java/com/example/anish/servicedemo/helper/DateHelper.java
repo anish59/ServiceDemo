@@ -23,7 +23,7 @@ import android.widget.TimePicker;
 
 public class DateHelper {
     public static String yyyyMMddHHmm="yyyyMMddHHmm";
-    public static String yyddHHmm="MMddHHmm";//for id
+    public static String yyddHHmm="yyddHHmm";//for id
     public static String ddMMyyyy_HHmm="dd-MM-yyyy:HH-mm";
 
     private static int mYear, mMonth, mDay, mHour, mMin;

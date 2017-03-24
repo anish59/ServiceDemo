@@ -35,19 +35,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickSetReminder(View view) {
+        callReminder(true);
+    }
+
+
+    public void clickSetReminderServie(View view) {
+        callReminder(false);
+    }
+
+    private void callReminder(boolean isBroadCast) {
         if (getResources().getString(R.string.date).toLowerCase().equals(btnDatePicker.getText().toString().toLowerCase())
-                || getResources().getString(R.string.time).toLowerCase().equals(btnTimePicker.getText().toString().toLowerCase())){
+                || getResources().getString(R.string.time).toLowerCase().equals(btnTimePicker.getText().toString().toLowerCase())) {
             Toast.makeText(context, "Please Select Date and Time", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String remindDateNTime=String.format("%s:%s",btnDatePicker.getText().toString(),btnTimePicker.getText().toString());
-        Date date=DateHelper.parseDate(remindDateNTime, DateHelper.ddMMyyyy_HHmm);
-        int calId=Integer.parseInt(DateHelper.formatDate(remindDateNTime,DateHelper.ddMMyyyy_HHmm,DateHelper.yyddHHmm));
-        Log.e("remindDateNTime:-> ",remindDateNTime);
-        Log.e("date:-> ",date+"");
-        Log.e("calId:-> ",calId+"");
-        AlarmHelper alarmHelper=new AlarmHelper();
-        alarmHelper.setReminder(context,date,calId);
+        String remindDateNTime = String.format("%s:%s", btnDatePicker.getText().toString(), btnTimePicker.getText().toString());
+        Date date = DateHelper.parseDate(remindDateNTime, DateHelper.ddMMyyyy_HHmm);
+        int calId = Integer.parseInt(DateHelper.formatDate(remindDateNTime, DateHelper.ddMMyyyy_HHmm, DateHelper.yyddHHmm));
+        Log.e("remindDateNTime:-> ", remindDateNTime);
+        Log.e("date:-> ", date + "");
+        Log.e("calId:-> ", calId + "");
+        AlarmHelper alarmHelper = new AlarmHelper();
+        alarmHelper.setReminder(context, date, calId, isBroadCast);
     }
+
 }

@@ -10,6 +10,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.example.anish.servicedemo.MainActivity;
+import com.example.anish.servicedemo.NotifyService;
 import com.example.anish.servicedemo.R;
 
 import java.util.Calendar;
@@ -45,13 +46,13 @@ public class AlarmHelper extends BroadcastReceiver {
                 .setDefaults(NotificationCompat.DEFAULT_SOUND);
 
 
-        Random random = new Random();
+        Random random = new Random(); // to avoid different notification to call at same time
         int m = random.nextInt(9999 - 1000) + 1000;
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(m, builder.build()); //0 = ID of notification
     }
 
-    public void setReminder(Context context, Date date, int calId) {
+    public void setReminder(Context context, Date date, int calId,boolean isBroadCast) {
         cancelAlarm(context, calId);
         if (date == null) {
             return;
@@ -59,18 +60,25 @@ public class AlarmHelper extends BroadcastReceiver {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         Log.e("calendar time",""+calendar);
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra(AppConstants.intentTitle, "Test Title");
-        intent.putExtra(AppConstants.intentSubTitle, "Test subtitle");
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, calId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent;
+        if (isBroadCast) {
+            Intent intent = new Intent(context, AlarmHelper.class);
+            intent.putExtra(AppConstants.intentTitle, "Test Title");//this you add as an argument from the mainActivity class itself
+            intent.putExtra(AppConstants.intentSubTitle, "Test subtitle");//comment as above
+            pendingIntent = PendingIntent.getBroadcast(context, calId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        } else {
+            Intent intent = new Intent(context, NotifyService.class);
+            intent.putExtra(AppConstants.intentTitle, "Test Title");//this you add as an argument from the mainActivity class itself
+            intent.putExtra(AppConstants.intentSubTitle, "Test subtitle");//comment as above
+            pendingIntent = PendingIntent.getService(context, calId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
 
         AlarmManager alarmManager = getAlarmManager(context);
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
 
-
     }
 
-    private AlarmManager getAlarmManager(Context context) {
+    private AlarmManager getAlarmManager(Context context) { //using the alarm service of device
 
         if (this.alarmManager == null) {
             alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -78,7 +86,7 @@ public class AlarmHelper extends BroadcastReceiver {
         return alarmManager;
     }
 
-    public void cancelAlarm(Context context, long alarmID) {
+    public void cancelAlarm(Context context, long alarmID) { // to cancel the alarm of a specific id.
         Intent intent = new Intent(context, AlarmHelper.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, (int) alarmID, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager alarmManager = getAlarmManager(context);

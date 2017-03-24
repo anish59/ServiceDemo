@@ -2,46 +2,56 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:gravity="center_horizontal|center_vertical"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal|center_vertical"
+    android:orientation="vertical"
     tools:context="com.example.anish.servicedemo.MainActivity">
 
-  <LinearLayout
-      android:orientation="horizontal"
-      android:layout_height="wrap_content"
-      android:layout_width="wrap_content">
-
-  <Button
-      android:text="@string/date"
-      android:onClick="clickPickDate"
-      android:id="@+id/btnDatePicker"
-      android:textSize="15dp"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      tools:layout_editor_absoluteY="231dp"
-      tools:layout_editor_absoluteX="148dp" />
-
-    <Button
-        android:text="@string/time"
-        android:onClick="clickTimePick"
-        android:id="@+id/btnTimePicker"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
-        tools:layout_editor_absoluteY="172dp"
-        tools:layout_editor_absoluteX="148dp" />
-</LinearLayout>
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnDatePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="clickPickDate"
+            android:text="@string/date"
+            android:textSize="15dp"
+            tools:layout_editor_absoluteX="148dp"
+            tools:layout_editor_absoluteY="231dp" />
+
+        <Button
+            android:id="@+id/btnTimePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="clickTimePick"
+            android:text="@string/time"
+            android:textSize="15dp"
+            tools:layout_editor_absoluteX="148dp"
+            tools:layout_editor_absoluteY="172dp" />
+    </LinearLayout>
+
     <Button
-        android:id="@+id/btnSave"
+        android:id="@+id/btnSaveService"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="clickSetReminder"
-        android:text="Set reminder"
+        android:text="Set reminder Service"
         android:textSize="15dp"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="172dp" />
 
+    <Button
+        android:id="@+id/btnSaveBroadCast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickSetReminderService"
+        android:text="Set reminder BroadCast"
+        android:textSize="15dp"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="172dp" />
 
 </LinearLayout>
