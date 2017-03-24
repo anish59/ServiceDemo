@@ -38,8 +38,8 @@
         android:id="@+id/btnSaveService"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="clickSetReminder"
-        android:text="Set reminder Service"
+        android:onClick="clickSetBroadCast"
+        android:text="Set  BroadCast"
         android:textSize="15dp"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="172dp" />
@@ -48,8 +48,8 @@
         android:id="@+id/btnSaveBroadCast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="clickSetReminderService"
-        android:text="Set reminder BroadCast"
+        android:onClick="clickSetService"
+        android:text="Set Service"
         android:textSize="15dp"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="172dp" />

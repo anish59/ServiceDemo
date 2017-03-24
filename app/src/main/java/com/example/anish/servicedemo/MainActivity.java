@@ -34,16 +34,16 @@ public class MainActivity extends AppCompatActivity {
         DateHelper.getTimeFromDilog(context, btnTimePicker);// resulting format: HH-mm
     }
 
-    public void clickSetReminder(View view) {
-        callReminder(true);
+    public void clickSetBroadCast(View view) {
+        callReminder(AppConstants.IntentBroadCast);
     }
 
 
-    public void clickSetReminderServie(View view) {
-        callReminder(false);
+    public void clickSetService(View view) {
+        callReminder(AppConstants.IntentService);
     }
 
-    private void callReminder(boolean isBroadCast) {
+    private void callReminder(int receiverOption) {
         if (getResources().getString(R.string.date).toLowerCase().equals(btnDatePicker.getText().toString().toLowerCase())
                 || getResources().getString(R.string.time).toLowerCase().equals(btnTimePicker.getText().toString().toLowerCase())) {
             Toast.makeText(context, "Please Select Date and Time", Toast.LENGTH_SHORT).show();
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         Log.e("date:-> ", date + "");
         Log.e("calId:-> ", calId + "");
         AlarmHelper alarmHelper = new AlarmHelper();
-        alarmHelper.setReminder(context, date, calId, isBroadCast);
+        alarmHelper.setReminder(context, date, calId, receiverOption);
     }
 
 }

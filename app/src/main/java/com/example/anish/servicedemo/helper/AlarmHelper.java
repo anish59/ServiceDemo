@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.anish.servicedemo.MainActivity;
 import com.example.anish.servicedemo.NotifyService;
@@ -31,28 +32,33 @@ public class AlarmHelper extends BroadcastReceiver {
     }
 
     private void showNotification(Context context, Intent intent) {
-        String title = intent.getExtras().getString(AppConstants.intentTitle);
-        String message = intent.getExtras().getString(AppConstants.intentSubTitle);
-        Intent intent1 = new Intent(context, MainActivity.class);
-        int requestCode = 0;
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, requestCode, intent1, PendingIntent.FLAG_ONE_SHOT);
+//        String title = intent.getExtras().getString(AppConstants.intentTitle);
+//        String message = intent.getExtras().getString(AppConstants.intentSubTitle);
+//        Intent intent1 = new Intent(context, MainActivity.class);
+//        int requestCode = 0;
+//        PendingIntent pendingIntent = PendingIntent.getActivity(context, requestCode, intent1, PendingIntent.FLAG_ONE_SHOT);
+//
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+//                .setSmallIcon(R.mipmap.ic_launcher)
+//                .setContentTitle(title)
+//                .setContentText(message)
+//                .setAutoCancel(true)
+//                .setContentIntent(pendingIntent)
+//                .setDefaults(NotificationCompat.DEFAULT_SOUND);
+//
+//
+//        Random random = new Random(); // to avoid different notification to call at same time
+//        int m = random.nextInt(9999 - 1000) + 1000;
+//        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+//        notificationManager.notify(m, builder.build()); //0 = ID of notification
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(title)
-                .setContentText(message)
-                .setAutoCancel(true)
-                .setContentIntent(pendingIntent)
-                .setDefaults(NotificationCompat.DEFAULT_SOUND);
-
-
-        Random random = new Random(); // to avoid different notification to call at same time
-        int m = random.nextInt(9999 - 1000) + 1000;
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(m, builder.build()); //0 = ID of notification
+        Intent i = new Intent();
+        i.setClassName("com.example.anish.servicedemo", "com.example.anish.servicedemo.MainActivity");
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(i);
     }
 
-    public void setReminder(Context context, Date date, int calId,boolean isBroadCast) {
+    public void setReminder(Context context, Date date, int calId,int receiver) {
         cancelAlarm(context, calId);
         if (date == null) {
             return;
@@ -61,14 +67,14 @@ public class AlarmHelper extends BroadcastReceiver {
         calendar.setTime(date);
         Log.e("calendar time",""+calendar);
         PendingIntent pendingIntent;
-        if (isBroadCast) {
+        if (receiver==AppConstants.IntentBroadCast) {
             Intent intent = new Intent(context, AlarmHelper.class);
-            intent.putExtra(AppConstants.intentTitle, "Test Title");//this you add as an argument from the mainActivity class itself
+            intent.putExtra(AppConstants.intentTitle, "Test Title");//this you can add as an argument from the mainActivity class itself
             intent.putExtra(AppConstants.intentSubTitle, "Test subtitle");//comment as above
             pendingIntent = PendingIntent.getBroadcast(context, calId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         } else {
             Intent intent = new Intent(context, NotifyService.class);
-            intent.putExtra(AppConstants.intentTitle, "Test Title");//this you add as an argument from the mainActivity class itself
+            intent.putExtra(AppConstants.intentTitle, "Test Title");//this you can add as an argument from the mainActivity class itself
             intent.putExtra(AppConstants.intentSubTitle, "Test subtitle");//comment as above
             pendingIntent = PendingIntent.getService(context, calId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         }

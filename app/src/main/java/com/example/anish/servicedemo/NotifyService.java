@@ -20,6 +20,9 @@ public class NotifyService extends Service {
     @Override
     public int onStartCommand(Intent intent,int flags, int startId) {
         Toast.makeText(this, "hey there", Toast.LENGTH_SHORT).show();
-        return START_STICKY;
+        Intent intent1 = new Intent(this, MainActivity.class);
+        intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent1);
+        return START_NOT_STICKY;
     }
 }
