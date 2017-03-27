@@ -35,12 +35,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickSetBroadCast(View view) {
-        callReminder(AppConstants.IntentBroadCast);
+        callReminder(AppConstants._BROADCAST);
     }
 
-
     public void clickSetService(View view) {
-        callReminder(AppConstants.IntentService);
+        callReminder(AppConstants._SERVICE);
+    }
+
+    public void clickSetNotification(View view) {
+        callReminder(AppConstants._NOTIFY);
     }
 
     private void callReminder(int receiverOption) {

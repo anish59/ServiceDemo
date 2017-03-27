@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.anish.servicedemo">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
@@ -11,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,11 +30,11 @@
         </receiver>
 
         <service
-            android:name=".NotifyService"
+            android:name=".MyService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

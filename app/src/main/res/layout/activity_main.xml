@@ -35,7 +35,17 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnSaveService"
+        android:id="@+id/btnSetBroadCast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickSetService"
+        android:text="Set Service"
+        android:textSize="15dp"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="172dp" />
+
+    <Button
+        android:id="@+id/btnSetService"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="clickSetBroadCast"
@@ -45,11 +55,11 @@
         tools:layout_editor_absoluteY="172dp" />
 
     <Button
-        android:id="@+id/btnSaveBroadCast"
+        android:id="@+id/btnNotify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="clickSetService"
-        android:text="Set Service"
+        android:onClick="clickSetNotification"
+        android:text="Set Notification"
         android:textSize="15dp"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="172dp" />

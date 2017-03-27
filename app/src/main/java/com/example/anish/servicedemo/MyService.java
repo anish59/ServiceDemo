@@ -6,8 +6,8 @@ import android.os.IBinder;
 import android.support.annotation.IntDef;
 import android.widget.Toast;
 
-public class NotifyService extends Service {
-    public NotifyService() {
+public class MyService extends Service {
+    public MyService() {
     }
 
     @Override
